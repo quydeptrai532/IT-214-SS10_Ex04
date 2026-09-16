@@ -1,0 +1,21 @@
+=== KET QUA CHAY TEST (Embedded Kafka) - Ex04 ===
+Test: InventoryConsumerErrorHandlingTest.messageLoiDuocDuaVaoDlqVaConsumerKhongBiKet
+Ket qua: tests=1  failures=0  errors=0
+
+--- 1) Retry: that bai lan 1 (lan dau) roi retry them 3 lan, moi lan cach 2 giay ---
+2026-09-16T19:01:41.547 WARN  KafkaConfig : That bai lan thu 1 (1 lan dau + toi da 3 lan retry) cho offset=0
+2026-09-16T19:01:43.619 WARN  KafkaConfig : That bai lan thu 2 (1 lan dau + toi da 3 lan retry) cho offset=0
+2026-09-16T19:01:45.687 WARN  KafkaConfig : That bai lan thu 3 (1 lan dau + toi da 3 lan retry) cho offset=0
+2026-09-16T19:01:47.778 WARN  KafkaConfig : That bai lan thu 4 (1 lan dau + toi da 3 lan retry) cho offset=0
+
+--- 2) Het luot retry -> day message loi sang DLQ ---
+2026-09-16T19:01:47.779 ERROR KafkaConfig : Day message loi sang DLQ:
+    topic=order-events partition=2 offset=0 key=O-ERR-01
+    value={"orderId":"O-ERR-01","productId":"P001","quantity":2
+
+--- 3) Xac nhan DLQ nhan duoc message loi ---
+>>> DLQ nhan duoc message loi: key=O-ERR-01 value={"orderId":"O-ERR-01","productId":"P001","quantity":2
+
+--- 4) Consumer KHONG bi ket: message hop le tiep theo van duoc xu ly ---
+2026-09-16T19:01:49.084 INFO InventoryConsumer : Tru kho thanh cong: orderId=O-OK-01 productId=P002 quantity=5
+>>> Consumer van xu ly message hop le sau loi: P002 50 -> 45
