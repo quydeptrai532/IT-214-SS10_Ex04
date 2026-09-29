@@ -80,3 +80,4 @@ Day message loi sang DLQ: topic=order-events partition=2 offset=0 key=O-ERR-01
 Tru kho thanh cong: orderId=O-OK-01 productId=P002 quantity=5
 >>> Consumer van xu ly message hop le sau loi: P002 50 -> 45
 ```
+a
